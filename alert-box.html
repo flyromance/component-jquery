@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="css/vajoy-base.css" rel="stylesheet" type="text/css"/>
+    <link href="css/quick-layout.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .alert-box{
+            height:300px; width: 500px; border: 1px solid gray;padding: 40px;background-color: green;text-align: center;
+            position: absolute;
+            left: 50%;
+            margin-left:-290px;
+            top: 50%;
+            margin-top: -190px;
+            z-index:1001;
+            display: none;
+        }
+        /*.modal{*/
+            /*background-color: #ccc;*/
+            /*position:absolute;*/
+            /*left: 0px;*/
+            /*top:0px;*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+            /*z-index: 1000;*/
+            /*display: none;*/
+        /*}*/
+    </style>
+    <script type="text/javascript" src="jquery-1.11.3.js"></script>
+</head>
+<body>
+    <button class="btn btn-blue lh24 yellow">click me</button>
+
+    <div class="alert-box">
+        <span>hello world</span><br/><br/>
+        <span class="close">close</span>
+    </div>
+
+    <script type="text/javascript">
+        $(function(){
+            var $modal = $('<div class="modal"></div>');
+            $modal.css({
+                "position":"absolute","left":"0px",top:"0px","width":"100%","height":"100%",
+                "backgroundColor":"#ccc","display":"none","z-index":"1000"
+            }).appendTo("body");
+//            $('body').append($modal);
+
+            $(".btn").click(function(){
+                $(".modal").show("fast",function(){
+                    $(".alert-box").show("normal");
+                });
+//                $('.modal').css({'opacity':0,'display':'block'}).animate({"opacity":1});
+//                $('.modal').css({'opacity':0,'display':'block',"height":0,width:0}).animate({"opacity":1,"height":"100%",width:"100%"});
+            });
+            $('body').on('click','.modal, .close',function(e){
+//                $(".modal, .alert-box").hide();
+//                $('.modal').animate({'opacity':0},function(){
+//                    $(this).css('display','none');
+//                })
+                $('.modal').animate({'opacity':0},'normal',function(){
+                    $(this).css('display','none')
+                });
+                $(".alert-box").slideToggle("normal");
+            })
+//            $(".close").click(function(){
+//                $(".modal, .alert-box").hide();
+//            });
+        });
+    </script>
+</body>
+</html>

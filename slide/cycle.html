@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../css/vajoy-base.css"/>
+    <script type="text/javascript" src="../jquery-1.11.3.js"></script>
+    <style type="text/css">
+        .slide{width: 400px;height: 300px;overflow: hidden;position: relative;margin: 50px auto 0px;}
+        .slide-item{display: none;box-shadow:5px 5px #000;}
+        .slide-item img{width: 400px;height: 300px;border-radius: 5px;display:block;}
+        li.active{display: block}
+        .fire-list{position: absolute; height: 80px;width: 400px;left: 0px;bottom: 0px;}
+        .fire-item{width: 80px;float:left;height: 80px;opacity: 0.5;}
+        .fire-item img{width: 100%;height: 100%;}
+        li.curr{ opacity: 1; }
+        .prev, .next{position: absolute;width: 30px;height: 30px;background-color: #ddd;top:135px;margin-top: -15px;}
+        .prev{left: 20px;}
+        .next{right: 20px;z-index:2;}
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <ul class="slide-list">
+            <li class="slide-item active"><img src="../img/1.jpg"> </li>
+            <li class="slide-item"><img src="../img/2.jpg"> </li>
+            <li class="slide-item"><img src="../img/3.jpg"> </li>
+            <li class="slide-item"><img src="../img/4.jpg"> </li>
+            <li class="slide-item"><img src="../img/5.jpg"> </li>
+        </ul>
+        <ul class="fire-list">
+            <li class="fire-item curr"><img src="../img/1.jpg"> </li>
+            <li class="fire-item"><img src="../img/2.jpg"> </li>
+            <li class="fire-item"><img src="../img/3.jpg"> </li>
+            <li class="fire-item"><img src="../img/4.jpg"> </li>
+            <li class="fire-item"><img src="../img/5.jpg"> </li>
+        </ul>
+        <span class="prev"></span>
+        <span class="next"></span>
+    </div>
+    <script type="text/javascript">
+        var cur = 0;
+        var len = $('.slide-item').length;
+        var autoFn = function(){
+            $('.slide-item').each(function(index, item){
+                var temp = $(item);
+                if(temp.hasClass("active")){
+                    cur = index;
+                }
+            });
+            if(cur == len -1){
+                $($('.slide-item')[cur]).fadeOut('normal').removeClass('active');
+                $($('.slide-item')[0]).fadeIn('normal').addClass('active');
+
+                $('.fire-item').removeClass('curr');
+                $($('.fire-item')[0]).addClass("curr");
+            }else{
+                $($('.slide-item')[cur]).fadeOut('normal').removeClass('active');
+                $($('.slide-item')[cur+1]).fadeIn('normal').addClass('active');
+
+                $('.fire-item').removeClass('curr');
+                $($('.fire-item')[cur+1]).addClass("curr");
+            }
+        }
+        var autoSlide = setInterval(autoFn, 2000)
+
+        // 问题 如何调用间隔调用
+        $('.slide').hover(function(){
+            clearInterval(autoSlide);
+        },function(){
+            autoSlide = setInterval(autoFn, 2000)
+        });
+        $('.fire-item').each(function(index, item){
+            $(item).on('click',function(e){
+                var temp = $(this);
+                cur = index;
+                $('.slide-item').css("display",'none').removeClass('active');
+                $($('.slide-item')[index]).fadeIn('normal').addClass('active');
+
+                $('.fire-item').removeClass('curr');
+                temp.addClass("curr");
+            });
+        });
+        $(".next").click(function(){
+            if(cur == len -1){
+                $($('.slide-item')[cur]).fadeOut('normal').removeClass('active');
+                $($('.slide-item')[0]).fadeIn('normal').addClass('active');
+
+                $('.fire-item').removeClass('curr');
+                $($('.fire-item')[0]).addClass("curr");
+                cur = 0;
+            }else{
+                $($('.slide-item')[cur]).fadeOut('normal').removeClass('active');
+                $($('.slide-item')[cur+1]).fadeIn('normal').addClass('active');
+
+                $('.fire-item').removeClass('curr');
+                $($('.fire-item')[cur+1]).addClass("curr");
+                cur = cur + 1;
+            }
+        });
+        $(".prev").click(function(){
+            if(cur == 0){
+                $($('.slide-item')[cur]).fadeOut('normal').removeClass('active');
+                $($('.slide-item')[len-1]).fadeIn('normal').addClass('active');
+
+                $('.fire-item').removeClass('curr');
+                $($('.fire-item')[len-1]).addClass("curr");
+                cur = len-1;
+            }else{
+                $($('.slide-item')[cur]).fadeOut('normal').removeClass('active');
+                $($('.slide-item')[cur-1]).fadeIn('normal').addClass('active');
+
+                $('.fire-item').removeClass('curr');
+                $($('.fire-item')[cur-1]).addClass("curr");
+                cur = cur -1;
+            }
+        });
+    </script>
+</body>
+</html>

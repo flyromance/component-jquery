@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .mod-sqm{
+            display: inline-block;
+            width:200px;
+            height: 200px;
+            margin-right:20px;
+            background-color:gray;
+        }
+    </style>
+
+
+    <script type="text/javascript">
+        function addLoadEvent(fn) {
+            var loaded = window.onload;
+            if(loaded){
+                window.onload = function(){
+                    loaded();
+                    fn();
+                }
+            }else{
+                window.onload = fn;
+            }
+        }
+        function getElementsByClassName(selector, context){
+            context = context || document;
+            var nodeList = [];
+            if(false){
+                nodeList = context.getElementsByClassName(selector);
+            }else{
+                var allList = document.getElementsByTagName("*");
+                console.log(allList.length);
+                for(var i = 0, lens = allList.length; i < lens; i++){
+                    if(allList[i].className.indexOf(selector) > -1){
+//                        nodeList.push(allList[i]);
+                        nodeList[nodeList.length] = allList[i];
+                    }
+                }
+            }
+            return nodeList;
+        }
+        function Timer(obj){
+            this.obj = obj;
+            this.startTime = null;
+            this.totalTime = 0;
+            this.divTime = document.createElement("div");
+        }
+        Timer.prototype = {
+            constructor : Timer,
+            init : function(){
+                this.obj.appendChild(this.divTime);
+                this.showTime();
+                this.bindEvent();
+            },
+            showTime : function(){
+                var temp = this;
+                var message = "停留时间："+ temp.totalTime + "ms";
+                temp.divTime.innerHTML = message;
+            },
+            bindEvent : function(){
+                var temp = this;
+                temp.obj.addEventListener('mouseenter', function(){
+                    temp.startTime = new Date();
+                });
+                temp.obj.addEventListener('mouseleave', function(){
+                    temp.totalTime += new Date().getTime() - temp.startTime.getTime();
+                    temp.showTime();
+                })
+            }
+        };
+        function startTime(){
+            var divs = getElementsByClassName("mod-sqm");
+            var div1 = new Timer(divs[0]);
+            var div2 = new Timer(divs[1]);
+            var div3 = new Timer(divs[2]);
+            div1.init();
+            div2.init();
+            div3.init();
+        }
+        addLoadEvent(startTime);
+
+
+
+        DocumentRoot "C:/xampp/htdocs"
+        <Directory "C:/xampp/htdocs">
+
+
+
+
+    </script>
+
+</head>
+<body>
+<div class="mod-sqm" id="mod">
+    <p>1</p>
+</div>
+<div class="mod-sqm">
+    <p>1</p>
+</div>
+<div class="mod-sqm">
+    <p>1</p>
+</div>
+
+</body>
+</html>

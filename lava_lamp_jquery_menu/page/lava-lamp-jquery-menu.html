@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="description" content="jQuery火焰灯效果导航菜单 >> 张鑫旭-鑫空间-鑫生活" />
+<meta name="description" content="张鑫旭web前端学习之css" />
+<meta name="keywords" content="张鑫旭,鑫空间-鑫生活,博客,web前端,css,demo页面,学习" />
+<meta name="author" content="张鑫旭,zhangxixnu" />
+<title>jQuery火焰灯效果导航菜单 &gt;&gt; 张鑫旭-鑫空间-鑫生活</title>
+<link rel="shortcut icon" href="http://www.zhangxinxu.com/zxx_ico.png" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" />
+<link rel="stylesheet" href="../css/lava_lamp_demo.css" type="text/css" />
+<style type="text/css">
+.zxx_test_list{border-bottom:0; padding-bottom:40px;}
+.zxx_test_list h3{margin-top:35px;}
+</style>
+<script type="text/javascript" src="../js/jquery-1.2.6.pack.js"></script>
+<script type="text/javascript" src="../js/jquery.easing.min.js"></script>
+<script type="text/javascript" src="../js/jquery.lavalamp.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#1, #2, #3").lavaLamp({
+		fx: "backout", //缓动类型
+		speed: 700, //缓动时间
+		click: function(event, menuItem) {
+			return false; //单击触发事件
+		}
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="zxx_out_box">
+    <div class="zxx_in_box">
+        <div class="zxx_header">
+            <a href="http://www.zhangxinxu.com/">
+                <img class="l" src="http://www.zhangxinxu.com/wordpress/wp-content/themes/default/images/index_logo.gif" />
+            </a>
+            <span class="zxx_author_time">by zhangxinxu 2009-12-21 17:51</span>
+        </div> 
+        <h1 class="zxx_title">jQuery火焰灯效果导航菜单</h1>
+        <div class="zxx_main_con">
+			<div class="zxx_test_list">
+            	<h3>1.背景图片</h3>
+            	<ul class="lava_with_image fix" id="1">
+                    <li class="current"><a href="#zhangxinxu">圣诞节</a></li>
+                    <li><a href="#zhangxinxu">地震</a></li>
+                    <li><a href="#zhangxinxu">股市</a></li>
+                    <li><a href="#zhangxinxu">《十月围城》</a></li>
+                    <li><a href="#zhangxinxu">无线音乐咪咕汇</a></li>
+                </ul>
+                <h3>2.没有背景图片</h3>
+            	<ul class="lava_no_image fix" id="2">
+                    <li class="current"><a href="#zhangxinxu">圣诞节</a></li>
+                    <li><a href="#zhangxinxu">地震</a></li>
+                    <li><a href="#zhangxinxu">股市</a></li>
+                    <li><a href="#zhangxinxu">《十月围城》</a></li>
+                    <li><a href="#zhangxinxu">无线音乐咪咕汇</a></li>
+                </ul>
+                <h3>3.下边框</h3>
+            	<ul class="lava_with_border fix" id="3">
+                    <li class="current"><a href="#zhangxinxu">圣诞节</a></li>
+                    <li><a href="#zhangxinxu">地震</a></li>
+                    <li><a href="#zhangxinxu">股市</a></li>
+                    <li><a href="#zhangxinxu">《十月围城》</a></li>
+                    <li><a href="#zhangxinxu">无线音乐咪咕汇</a></li>
+                </ul>
+            </div>
+            <div class="zxx_code">
+            	<div class="mb10"><strong>页面jQuery代码：</strong></div>
+                <xmp>$(function(){
+	$("#1, #2, #3").lavaLamp({
+		fx: "backout",
+		speed: 700,
+		click: function(event, menuItem) {
+			return false;
+		}
+	});
+});
+</xmp>
+            </div>
+        </div>
+        <div class="zxx_footer">
+            Copyright &copy; by <a href="http://www.zhangxinxu.com/">张鑫旭-鑫空间-鑫生活</a>
+           	|
+            <a href="http://www.zhangxinxu.com/wordpress/?p=450">该篇相关文章</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

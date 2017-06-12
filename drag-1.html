@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #drag1, #drag2 {
+            width: 100px;
+            height: 100px;
+            background-color: #404040;
+            cursor: pointer;
+            position:absolute;
+            left:0px;
+            right:0px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id="drag1">
+        drag
+    </div>
+
+    <div id="drag2">
+        drag2
+    </div>
+    <!--<div class="drag"></div>-->
+    <!--<div class="drag"></div>-->
+    <!--<div class="drag"></div>-->
+
+<script type="text/javascript">
+    function Drag(obj){
+        this.obj = obj;
+    }
+    Drag.prototype = {
+        constructor:Drag,
+        getStartPos:function(e){
+            e = e || window.event;
+            var eX,eY;
+            if(e.pageX || e.pageY){
+                eX = e.pageX;
+                eY = e.pageY;
+            }
+            eX = e.clientX;
+            eY = e.clientY;
+            var positionX = eX- this.obj.offsetLeft;
+            var positionY = eY - this.obj.offsetTop;
+            return {
+                x: positionX,
+                y: positionY
+            }
+        },
+        getEndPos:function(e){
+            e = e || window.event;
+            if(e.pageX || e.pageY){
+                return {x:e.pageX, y:e.pageY};
+            }
+            return {
+                x:e.clientX + document.body.scrollLeft - document.body.clientLeft,
+                y:e.clientY + document.body.scrollTop  - document.body.clientTop
+            };
+        },
+        init:function(){
+            var that = this;
+            var startPos, endPos;
+            that.obj.onmousedown = function(e){
+                startPos = that.getStartPos(e);
+                console.log(startPos);
+                document.onmousemove = function(e){
+                    var endPos = that.getEndPos(e);
+                    console.log(endPos);
+                    that.obj.style.marginTop = endPos.y - startPos.y + "px";
+                    that.obj.style.marginLeft = endPos.x - startPos.x + "px";
+                };
+            };
+            document.onmouseup = function(e){
+                document.onmousemove = null;
+                endPos = that.getEndPos(e);
+            };
+        }
+    };
+    var obj1 = document.getElementById("drag1");
+    var drag1 = new Drag(obj1);
+    drag1.init();
+    var obj2 = document.getElementById("drag2");
+    var drag2 = new Drag(obj2);
+    drag2.init();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body{margin:0;}
+        ul{padding:0;margin: 0px auto;}
+        .img-list{width:800px;}
+        .img-list li{list-style: none;width: 400px;height:300px;padding-bottom: 10px;float: left;background-repeat: no-repeat; background-size:cover;}
+        .img-list img{width: 100%;height: 100%;border-radius: 5px;box-shadow:5px 3px 5px gray;background-repeat: no-repeat; background-size:cover;}
+        .slide-box{
+            width: 200px;
+            height:200px;
+            margin:0px auto;
+            overflow:scroll;
+            border: 1px solid black;
+        }
+        .slide-item{
+            height:200px;
+            width:200px;
+            float:left;
+        }
+        .slide-item img{
+            width: 100%;
+            height:100%;
+            background-repeat: no-repeat;background-size:cover;
+        }
+        .slide-list{
+            float:left;
+            width: 1200px;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-1.11.3.js"></script>
+    <script src="jquery.scrollLoading.js"></script>
+    <script type="text/javascript">
+        $(function(){
+//            $(".img-list img").scrollLoading();
+            $(".slide-list img").scrollLoading({
+//                callback:function(){
+//                    alert(this.attr("src"));
+//                },
+                container:'.slide-box'
+            });
+            $(".img-list li").scrollLoading();
+//            console.log($(window).width());
+//            console.log($("body").width());
+//            console.log($(document).width());
+//
+//            console.log($(window).height());
+//            console.log($(document).height());
+//            console.log($("body").height());
+//            console.log($(".slide-box").height());
+//            console.log($(".img-list").height());
+        });
+    </script>
+</head>
+<body>
+    <div class="slide-box">
+        <ul class="slide-list">
+            <li class="slide-item"><img alt="none" title="pic" data-url="img/1.jpg"/></li>
+            <li class="slide-item"><img alt="none" title="pic" data-url="img/2.jpg"/></li>
+            <li class="slide-item"><img alt="none" title="pic" data-url="img/3.jpg"/></li>
+            <li class="slide-item"><img alt="none" title="pic" data-url="img/4.jpg"/></li>
+            <li class="slide-item"><img alt="none" title="pic" data-url="img/5.jpg"/></li>
+            <li class="slide-item"><img alt="none" title="pic" data-url="img/6.jpg"/></li>
+        </ul>
+    </div>
+    <!--<ul class="img-list">-->
+        <!--<li><img data-url="img/1.jpg"/></li>-->
+        <!--<li><img data-url="img/2.jpg"/></li>-->
+        <!--<li><img data-url="img/3.jpg"/></li>-->
+        <!--<li><img data-url="img/4.jpg"/></li>-->
+        <!--<li><img data-url="img/5.jpg"/></li>-->
+        <!--<li><img data-url="img/6.jpg"/></li>-->
+        <!--<li><img data-url="img/7.jpg"/></li>-->
+        <!--<li><img data-url="img/8.jpg"/></li>-->
+        <!--<li><img data-url="img/9.jpg"/></li>-->
+        <!--<li><img data-url="img/10.jpg"/></li>-->
+    <!--</ul>-->
+
+    <ul class="img-list">
+        <li data-url="img/1.jpg"></li>
+        <li data-url="img/2.jpg"></li>
+        <li data-url="img/3.jpg"></li>
+        <li data-url="img/4.jpg"></li>
+        <li data-url="img/5.jpg"></li>
+        <li data-url="img/6.jpg"></li>
+        <li data-url="img/7.jpg"></li>
+        <li data-url="img/8.jpg"></li>
+    </ul>
+
+</body>
+</html>

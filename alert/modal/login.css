@@ -1,0 +1,383 @@
+/*
+* description: 登录、注册弹窗
+* auth:        潘文
+* time:        2016.9.21
+*/
+
+.frame-mod input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.frame-mod {
+    padding: 10px;
+    width: 500px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 10100;
+    font: 14px/1.5 "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, arial, sans-serif;
+    background: rgba(0, 0, 0, .2);
+    border-radius: 5px;
+}
+
+.fr-wrap {
+    width: 500px;
+    background: #fff;
+}
+
+.full-bg {
+    position: fixed;
+    z-index: 999;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background: url(/static/img/login/full-bg.png) repeat;
+    display: none;
+}
+
+.login-title {
+    height: 65px;
+    border-bottom: 1px solid #eee;
+}
+
+.login-title span {
+    display: block;
+    float: left;
+    position: relative;
+    width: 100px;
+    height: 65px;
+    line-height: 65px;
+    font-size: 18px;
+    color: #444;
+    margin-left: 100px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.login-title span i {
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: #dd3635;
+    display: none;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    border-radius: 2px;
+}
+
+.login-title span.current {
+    color: #e1413e
+}
+
+.login-title span.current i {
+    display: block;
+}
+
+.BTVlogin-main li {
+    display: none;
+}
+
+.BTVlogin-main li.current {
+    display: block
+}
+
+.BTVlogin-main .login-box {
+    padding: 52px 0 38px 0;
+    overflow: hidden;
+}
+
+.login-form {
+    border-bottom: 1px solid #e8edef;
+    padding: 0 100px 40px;
+}
+
+.ipt {
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    border-radius: 3px;
+    border: 1px solid #e6e6e6;
+    background: #fff;
+    color: #444;
+    font-size: 12px;
+    padding: 0 9px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.ipt:focus {
+    background: #fff;
+}
+
+.error-tips {
+    display: block;
+    height: 26px;
+    font-style: normal;
+    font-size: 12px;
+    color: #e61e25;
+    background: url(http://p1.qhmsg.com/t0105751a22aeb53801.png) no-repeat 0 -44px;
+    padding-left: 18px;
+    line-height: 26px;
+    clear: both;
+}
+
+.default-li {
+    height: 42px;
+    color: #b2b2b2;
+    padding-top: 18px;
+}
+
+.default-li .fl {
+    float: left;
+}
+
+.default-li .fr {
+    float: right;
+}
+
+.momentHid {
+    display: none;
+}
+
+.for-word {
+    color: #399be6;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.for-deal {
+    color: #399be6;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 4px;
+}
+
+.login-btn {
+    width: 100%;
+    height: 35px;
+    outline: none;
+    text-align: center;
+    background: #e1322f;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+    font: 14px/1.5 "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, arial, sans-serif
+}
+
+.frame-mod .btn-close {
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    top: 10px;
+    right: -35px;
+    background: url(/static/img/login/close-btn.png);
+    cursor: pointer;
+}
+
+.rem-la {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    background: url(/static/img/login/check-box.png) no-repeat;
+    padding-left: 25px;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.la-uncheck {
+    background-position: 0 0;
+}
+
+.la-checked {
+    background-position: 0 -20px
+}
+
+.rem-lo {
+    display: none;
+}
+
+.other-login {
+    text-align: center;
+    padding-top: 38px;
+}
+
+.other-login p {
+    background: url(/static/img/login/other-icon.png) no-repeat
+}
+
+.other-login p {
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    margin: 0 5px;
+    width: 30px
+}
+
+.other-login .other-qihoo {
+    background: url(/static/img/login/qihoo-icon.png) no-repeat
+}
+
+.other-login p a {
+    display: block;
+    height: 30px
+}
+
+.other-login p.other-wx {
+    background-position: 0 -30px
+}
+
+.other-login p.other-qq {
+    background-position: 0 -60px
+}
+
+.other-login p.other-wb {
+    background-position: 0 0
+}
+
+.other-login p.other-360 {
+    background-position: -138px 0
+}
+
+.other-login h5 {
+    color: #444;
+    font-size: 18px;
+    padding-bottom: 18px;
+}
+
+.core {
+    min-height: 64px;
+}
+
+.coremin .ipt {
+    width: 228px;
+    float: left;
+    border-radius: 3px 0 0 3px;
+    border-right: none;
+}
+
+.minCore {}
+
+.reg-box {
+    padding: 40px 0 60px 0;
+}
+
+.reg-form {
+    padding: 0 90px;
+}
+
+.yz-img,
+.yz-sms {
+    display: block;
+    width: 90px;
+    height: 36px;
+    background: #fff;
+    float: right;
+    cursor: pointer;
+    border-radius: 0 3px 3px 0;
+    border: 1px solid #e6e6e6;
+}
+
+.yz-img img {
+    width: 80px;
+    height: 36px;
+}
+
+.yz-sms {
+    border-left: 1px solid #e5e5e5;
+    line-height: 36px;
+    color: #666;
+    font-size: 12px;
+    text-align: center;
+}
+
+.disabled {
+    color: #ccc
+}
+
+.bui-tip-msg {
+    position: absolute;
+    z-index: 99999;
+    border: 1px solid #e0e0e0;
+    padding: 3px 15px 3px 10px;
+    background: #fff;
+    color: #666;
+    box-shadow: 0 0 2px #e0e0e0;
+    display: none;
+}
+
+.bui-tip-msg span {
+    vertical-align: middle;
+    line-height: 16px;
+}
+
+.login-btn:hover {
+    background: #ef4a47
+}
+
+.msg-box {
+    background: #fff url(http://p1.qhmsg.com/t0105751a22aeb53801.png) no-repeat;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 2px #e0e0e0;
+    color: #666;
+    display: none;
+    padding: 3px 15px 3px 24px;
+    position: absolute;
+    z-index: 99999;
+    font: 14px/1.5 "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Tahoma, arial, sans-serif;
+}
+
+.icon-error {
+    background-position: 4px -43px
+}
+
+.icon-success {
+    background-position: 4px -153px;
+}
+
+.zw {
+    display: none;
+}
+
+.bounce-in {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-name: bounce-in;
+    animation-name: bounce-in
+}
+
+@-webkit-keyframes bounce-in {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.5);
+        transform: scale(.5)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@keyframes bounce-in {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.5);
+        -ms-transform: scale(.5);
+        transform: scale(.5)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1)
+    }
+}

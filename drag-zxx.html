@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>drag</title>
+    <style type="text/css">
+        .box{position:absolute;left:100px;top:100px;padding: 5px;box-shadow:2px 2px 4px #666666; font-size:12px;}
+        #box2{left:500px;}
+        #box3{left:900px;  }
+        .main{border:1px solid #a0b3d6;background-color: #fff;  }
+        .bar{line-height:24px;padding-left:5px;border-bottom:1px solid #a0b3d6;background-color:#beceeb;cursor:move;}
+        .content{padding: 10px 5px;height:200px;width:250px;}
+    </style>
+    <script type="text/javascript">
+        // 定义Drag构造函数，并设置每个实例的特权属性（也就是将来要创建的每个实例对象私有的属性）；
+        function Drag(bar, target) {
+            // 此处的bar是指触发拖拽事件的对象；
+            this.bar = bar;
+
+            // 此处的target是值实际上被拖动的对象；
+            this.target = target;
+
+            // 这个flag相当于是一个开关，用于判断事件是否能够执行；
+            this.flag = false;
+        }
+        // 构造函数原型上添加方法，也是为其实例添加公用方法公用方法；
+        Drag.prototype = {
+            // 重新声明原型的constructor属性，也就是为实例指定正真的创建者；这里不重新指定也没问题，就是为了。。。
+            constructor : Drag,
+
+            // 初始化每个实例的属性，为绑定事件做好准备；
+            init : function(){
+                // 这边的this其实是指调用这个init函数方法的那个对象，也就是我们所创建的实例；
+                // 这么写有好处，代码执行到绑定事件那一块再详细的讲；
+                var temp = this;
+
+                // 获取实例对象上最先设定的样式值，这边就是left和top属性；
+                temp.left = temp.getCss(temp.target, "left");
+                temp.top = temp.getCss(temp.target, "top");
+
+                // 预先声明下面要用的到值，这边是指储存鼠标点下去的瞬间鼠标相对于屏幕的位置（clientX、clientY）
+                temp.mousePosX = null;
+                temp.mousePosY = null;
+
+                // 发出为实例对象绑定事件的命令；
+                temp.bindEvent();
+            },
+            //
+            getCss : function(o , prop){
+                // Dom对象的style属性指向的对象只能获得嵌入式样式的值，比如<a style="..."></a>，这种写在元素内部的可以获得；
+                // 但是通过外联样式表和内联样式表设置的样式值，只能通过以下方法获得，currentStyle对应的是Ie，另一个对应的是其他浏览器；
+                return o.currentStyle ? o.currentStyle[prop] : document.defaultView.getComputedStyle(o, null)[prop];
+            },
+            bindEvent : function(){
+                // 先把调用这个bindEvent方法的this对象（也就是我们创建的实例对象）传递给temp变量，于是temp也就指向了实例对象；
+                // 因此，在当前函数的执行环境内，想要调用这个实例对象，而不必要使用this了，因为此时的this可能指向的其他的对象；
+                // 比如，在为某个对象绑定事件的时候，这个事件内部的this肯定是指向绑定的对象的，而不是我们想要的最开始的那个“this”
+                var temp = this;
+
+                // 监听鼠标点下的事件函数
+                temp.bar.onmousedown = function(e){
+                    // 这边的e是指事件对象，老Ie不能直接使用，得通过window.event来引用；
+                    e = e || window.event;
+
+                    // 点下的瞬间就把这个开关打开，表明现在可以拖动了；
+                    temp.flag = true;
+
+                    // 获取鼠标相对与浏览器窗口的位置，并且赋值给实例对象的mousePos属性；
+                    temp.mousePosX = e.clientX;
+                    temp.mousePosY = e.clientY;
+                };
+
+                // 监听鼠标移动事件，注意这个绑定到document对象上的事件，因为鼠标在整个文档上移动；
+                // 这边不能用onmousemove方法绑定事件，因为我们的实例可能有多个，如果用次方法，最后初始化的那个实例才绑定到事件函数；
+                document.addEventListener('mousemove' ,function(e){
+                    e = e || window.event;
+
+                    // 因为在鼠标点下的时候，已经指定flag为true了，所以下面的代码才会执行；
+                    // 如果没有这个开关控制，我们移动鼠标的时候，我们创建的实例对象都要移动；
+                    if(temp.flag){
+
+                        // （e.clientX - temp.mousePosX）代表了鼠标自按下后滑动的距离；
+                        //  parseInt(temp.left)是指鼠标还没滑动时，被拖动对象的初始位置；
+                        temp.target.style.left = parseInt(temp.left) + e.clientX - temp.mousePosX + "px";
+                        temp.target.style.top = parseInt(temp.top) + e.clientY - temp.mousePosY + "px";
+                    }
+                });
+
+                // 鼠标放开后事件
+                document.addEventListener('mouseup', function(e){
+                    // 鼠标放开后，就把这个开关了，就说明拖动对象不能被拖动了；
+                    temp.flag = false;
+
+                    // 记录被拖动对象的被拖动后的位置
+                    temp.left = temp.getCss(temp.target, "left");
+                    temp.top = temp.getCss(temp.target, "top");
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="box" id="box1"><div class="main"><div class="bar">拖拽区</div><div class="content">内容区块</div></div></div>
+    <div class="box" id="box2"><div class="main"><div class="bar">拖拽区</div><div class="content">内容区块</div></div></div>
+    <div class="box" id="box3"><div class="main"><div class="bar">拖拽区</div><div class="content">内容区块</div></div></div>
+
+<script type="text/javascript">
+    // 获取Dom元素，oBar是指拖动条，oBox是指实际上拖拽对象；
+    var oBox = document.getElementsByClassName('box');
+    var oBar = document.getElementsByClassName('bar');
+    // 创建实例对象，注意参数顺序；
+    var drag1 = new Drag(oBar[0], oBox[0]);
+    var drag2 = new Drag(oBar[1], oBox[1]);
+    var drag3 = new Drag(oBar[2], oBox[2]);
+    // 调用实例对象上的init方法，为实例对象指定设计好的操作流程；
+    drag1.init();
+    drag2.init();
+    drag3.init();
+</script>
+</body>
+</html>

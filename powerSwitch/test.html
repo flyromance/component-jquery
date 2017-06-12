@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style type="text/css">
+        li{list-style:none;}
+        body,ul{margin:0;padding:0;}
+        .clearfix{*zoom:1;}
+        .clearfix:after{content:'';display:table;clear: both;}
+        /*.tab{display: inline-block;} 最好别用display-inline,容易出现间距。*/
+        .tab{float:left;}
+        .tab_list{background-color: #ddd;font-size:14px;}
+        a.tab_a{display: block;text-decoration:none;color:black;padding:.5em 1.5em;}
+        a.tab_on{color:white;background-color: #0033ff;}
+        .tabpanel{width:100%;height: 100%;position: absolute;left: 0;top:0;text-align: center;}
+        .tab_content{position:relative;overflow:hidden;height:256px;border:1px solid #ddd;
+            border-bottom-left-radius:2px;border-bottom-right-radius:5px;}
+        .tabpanel img{width: 90%;height: 190px;margin-top: 30px;}
+        .tab_limit{margin:50px auto;width:340px;}
+        #tabAutoOperate{position:relative;text-align: center;z-index:1;}
+        .next, .prev, .play, .pause{position:absolute;top: 110px;}
+        .next, .prev{height: 60px;width:30px;background: #bbb center no-repeat;border-radius:4px;}
+        .next{right:-60px;background-image:url("img/next.png");}
+        .prev{left:-60px;background-image:url("img/prev.png");}
+        .play, .pause{width:50px;height:50px;left:50%;margin-left:-25px; }
+        .play{background: url("img/play.png") 0 -50px no-repeat;}
+        .pause{background:url("img/pause.png") 0 -50px no-repeat;}
+    </style>
+    <link type="text/css" href="test.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="tab_limit">
+    <div id="tabAutoOperate" class="tab_auto_play"></div>
+    <ul class="tab_list clearfix">
+        <li class="tab"><a href="#tabpanel1" class="tab_a tab_on tab_normal">美女1</a></li>
+        <li class="tab"><a href="#tabpanel2" class="tab_a tab_normal">美女2</a></li>
+        <li class="tab"><a href="#tabpanel3" class="tab_a tab_normal">美女3</a></li>
+        <li class="tab"><a href="#tabpanel4" class="tab_a tab_normal">美女3</a></li>
+    </ul>
+    <ul class="tab_content tab-rel">
+        <li class="tabpanel" id="tabpanel1"><img src="img/mm1.jpg"/></li>
+        <li class="tabpanel" id="tabpanel2" style="display: none;"><img src="img/mm2.jpg"/></li>
+        <li class="tabpanel" id="tabpanel3" style="display: none;"><img src="img/mm3.jpg"/></li>
+        <li class="tabpanel" id="tabpanel4" style="display: none;"><img src="img/mm2.jpg"/></li>
+    </ul>
+</div>
+<div id="box" style="display: none;width: 100px;height:100px;background-color:red;"></div>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-powerSwitch.js"></script>
+<script type="text/javascript">
+
+        $(".tab_normal").powerSwitch({
+            classAdd:"tab_on",
+            eventType:"hover",
+            animation:"translate",
+            container:$("#tabAutoOperate"),
+            duration:250,
+            autoTime:3000
+        })
+//
+
+</script>
+</body>
+</html>
