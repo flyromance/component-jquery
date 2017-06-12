@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.ui-datepick-wrap {
+    width: 400px;
+    margin: 100px auto;
+}
+
+.ui-datepick {
+    box-shadow: 2px 2px 8px rgba(127, 127, 127, 0.3);
+    font-size: 14px;
+}
+
+.ui-datepick-header {
+    position: relative;
+}
+
+.ui-datepick-title {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    padding: 0 50px;
+    font-size: 16px;
+}
+
+.ui-datepick-btn {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    user-select: none;
+}
+
+.ui-datepick-btn-left {
+    left: 20px;
+}
+
+.ui-datepick-btn-right {
+    right: 20px;
+}
+
+.ui-datepick-body table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ui-datepick-body th,
+.ui-datepick-body td {
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+}
+
+.ui-datepick-body th {
+    font-size: 12px;
+}
+
+.ui-datepick-body td {
+    cursor: pointer;
+    border: 1px solid #f2f2f2;
+}
+
+.ui-datepick-body td.gray {
+    color: #a1a1a1;
+}

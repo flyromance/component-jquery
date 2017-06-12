@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/layer.css"/>
+</head>
+<body>
+
+<input type="button" value="popup" id="btn"/>
+
+<!--
+<script type="text/javascript" src="../static/js/require.js" data-main="../static/js/page/index.js"></script>
+-->
+
+<script type="text/javascript" src="/js/require.js"></script>
+<script type="text/javascript" src="/js/lib/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="/js/pages/demo.js"></script>
+
+
+<!-- 模板 -->
+<script type="text/html" id="j-tpl-layer_1">
+    <div class="layer-box drop">
+        <div class='layer-head'>
+            <div class="layer-title">{{title}}</div>
+        </div>
+        <div class='layer-body'>
+            {{content}}
+
+        </div>
+        <div class='layer-foot'>
+            <button class="j-btn-yes btn-yes">是</button>
+            <button class="j-btn-no btn-no">否</button>
+        </div>
+        <button class="j-btn-close btn-close">X</button>
+    </div>
+</script>
+
+<script type="text/html" id="j-tpl-layer_2">
+    <div class="layer-box drop">
+        <div class='layer-head'>
+            <div class="layer-title">xxxx</div>
+        </div>
+        <div class='layer-body'>
+            xxxx
+        </div>
+        <div class='layer-foot'>
+            <button class="j-btn-yes btn-yes">是</button>
+            <button class="j-btn-no btn-no">否</button>
+        </div>
+        <button class="j-btn-close btn-close">X</button>
+    </div>
+</script>
+</body>
+</html>

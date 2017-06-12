@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .drag-bar{
+            width:300px;
+            height:30px;
+            background-color:#ddd;
+            position:relative;
+            margin:200px auto;
+        }
+        .drag-over{
+            width:100px;
+            height: 30px;
+            background-color:#aaa;
+        }
+        .btn{
+            position:absolute;
+            z-index:2;
+            height: 50px;
+            width:20px;
+            top:50%;
+            margin-top:-25px;background-color:red;left:100px;
+        }
+        .left, .right{
+            position:absolute;height: 30px;width:30px;top:0;text-align: center;line-height: 30px;
+        }
+        .left{left:-40px;}
+        .right{right:-40px;}
+    </style>
+</head>
+<body>
+<div id="show">0</div>
+<div class="drag-bar" id="drag-bar">
+    <div class="drag-over" id="drag-over"></div>
+    <span class="btn" id="drag-btn"></span>
+    <span class="left">0</span>
+    <span class="right">10</span>
+</div>
+<script type="text/javascript">
+    function dragBar(bar, barOver, btn, show){
+        this.btn = document.getElementById(btn);
+        this.show = document.getElementById(show);
+        this.bar = document.getElementById(bar);
+        this.barOver = document.getElementById(barOver);
+        this.init();
+    }
+    dragBar.prototype = {
+        init: function(){
+            var self = this;
+            self.btn.onmousedown = function(e){
+                var len = self.bar.offsetWidth - self.btn.offsetWidth;
+                var curLen = self.barOver.offsetWidth;
+                var initX = e.clientX;
+                document.onmousemove = function(e){
+                    var curX = e.clientX;
+                    var x = curLen + curX - initX;
+                    x = Math.min(x, len)
+                    x = Math.max(0, x);
+                    self.btn.style.left = x + 'px';
+                    self.barOver.style.width = x + 'px';
+                    self.show.innerHTML = x/len * 10;
+                };
+            };
+            document.onmouseup = function(e){
+                document.onmousemove = null;
+            }
+        }
+    }
+    var instance = new dragBar('drag-bar', 'drag-over', 'drag-btn', 'show');
+
+</script>
+</body>
+</html>
